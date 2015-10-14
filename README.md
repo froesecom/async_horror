@@ -32,6 +32,11 @@ What the experts says:
 + [This legend](http://stackoverflow.com/questions/33101565/celluloid-futures-not-faster-than-synchronous-computation/33102081#33102081) answered my StackOverflow question.
 + Most of what I read (including Celluloid docs), say things like this: "writing multi-threaded code can be tricky regardless of which tool you use, and even if you use Celluloid or ruby-concurrent to give you better higher-level abstractions than working directly with threads, working with multi-threaded concurrency will require becoming familiar with some techniques for such and require some tricky debugging from time to time."
 
+#### Experiment 4: The real world
++ When implementing asycn in Rails, it's important to know that ActiveRecord only allows 5 connections by default.
++ This exception will be raised if you try to implement more `ERROR -- : Actor crashed! ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds`
++ You can change the [default number of connections](https://devcenter.heroku.com/articles/concurrency-and-database-connections), but I'm not sure of the implications of that in production.
+
 ## TODO
 + Try to keep track of state and results
 + Experiment with threadsafe performance

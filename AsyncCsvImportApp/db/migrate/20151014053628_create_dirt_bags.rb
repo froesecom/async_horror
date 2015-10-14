@@ -11,6 +11,7 @@ class CreateDirtBags < ActiveRecord::Migration
       t.string :phone1
       t.string :phone2
       t.string :email
+      t.string :web
 
       t.timestamps null: false
     end

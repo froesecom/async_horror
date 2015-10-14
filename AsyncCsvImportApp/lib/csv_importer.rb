@@ -1,9 +1,10 @@
 module CsvImporter
+  require 'celluloid/current'
   class ImportActor
     include Celluloid
 
     def process_row(row)
-      puts row
+      DirtBag.create(row)
     end
 
   end
