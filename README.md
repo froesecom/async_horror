@@ -16,6 +16,12 @@ What the experts say:
 + Threads ain't free and if you create too many, you'll eventually run out of resources.
 + There is overhead associated with creating threads in the first place! (Maybe the source of my proformance issues?)
 
+#### Experiment 2: Waiting for actors to finish
++ In the previous expermient, the main thread was definitely finishing and killing all the actors before they had a chance to finish (demonstrated here in the `do_all_the_things_insync` method)
++ Celluloid futures can be used to ensure that the main thread waits untill all actors finish.
++ However, using futures runs just as slow as the synchronous code. What gives?
+
+
 ## TODO
 + Try to measure if actors are finishing
 + Figure out how to join actors and wait for main thread to finish
