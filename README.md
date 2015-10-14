@@ -17,14 +17,15 @@ What the experts say:
 + There is overhead associated with creating threads in the first place! (Maybe the source of my performance issues?)
 
 #### Experiment 2: Waiting for actors to finish
-+ In the previous expermient, the main thread was definitely finishing and killing all the actors before they had a chance to finish (demonstrated here in the `do_all_the_things_insync` method... it finishes in less time than it would take for one actor to finish)
++ In the previous expermient, the main thread was definitely finishing and killing all the actors before they had a chance to finish (demonstrated here in the `do_all_the_things_insync` method... the whole process finishes in less time than it would take for one actor to finish)
 + Celluloid futures can be used to ensure that the main thread waits untill all actors finish.
 + However, using futures runs just as slow as the synchronous code. What gives?
 
 #### Experiment 3: CPU-bound tasks and Ruby MRI
-+ Multi-threading of CPU-bound tasks gives no performance benefit
-+ If you use futures to do something non-CPU-bound (I/O tasks, or `sleep 1` for example), you will see benefit.
-+ This is because the Matz Ruby Interpreter (MRI) has 'Global Interpreter Lock' (GIL). We are not a thread guy!
++ Multi-threading of CPU-bound tasks gives no performance benefit, which is why `do_all_the_things_with_futures` method runs at the same speed as the synchronous method.
++ If you use futures to do something non-CPU-bound (I/O tasks, or `sleep 1` for example), you will see benefit. In this case it's 10 times faster.
++ The Matz Ruby Interpreter (MRI) uses 'Global Interpreter Lock' (GIL), which only allows one thread to execute at a time. We are not a thread guy! (More reading: [Nobody understands the GIL](http://www.jstorimer.com/blogs/workingwithcode/8085491-nobody-understands-the-gil))
++ Installing JRuby (Java implementation of Ruby) should allow for speed increase.
 
 What the experts says:
 
@@ -32,7 +33,9 @@ What the experts says:
 + Most of what I read (including Celluloid docs), say things like this: "writing multi-threaded code can be tricky regardless of which tool you use, and even if you use Celluloid or ruby-concurrent to give you better higher-level abstractions than working directly with threads, working with multi-threaded concurrency will require becoming familiar with some techniques for such and require some tricky debugging from time to time."
 
 ## TODO
++ Try to keep track of state and results
 + Experiment with threadsafe performance
++ Write to an actual database
 
 ##THEMES
 + writing multi-threaded code can be tricky regardless of which tool you use
