@@ -14,19 +14,19 @@
 ActiveRecord::Schema.define(version: 20151014053628) do
 
   create_table "dirt_bags", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "company_name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "post"
-    t.string   "phone1"
-    t.string   "phone2"
-    t.string   "email"
-    t.string   "web"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "first_name",   limit: 255
+    t.string   "last_name",    limit: 255
+    t.string   "company_name", limit: 255
+    t.string   "address",      limit: 255
+    t.string   "city",         limit: 255
+    t.string   "state",        limit: 255
+    t.string   "post",         limit: 255
+    t.string   "phone1",       limit: 255
+    t.string   "phone2",       limit: 255
+    t.string   "email",        limit: 255
+    t.string   "web",          limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end

@@ -37,13 +37,25 @@ What the experts says:
 + This exception will be raised if you try to implement more `ERROR -- : Actor crashed! ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds`
 + You can change the [default number of connections](https://devcenter.heroku.com/articles/concurrency-and-database-connections), but I'm not sure of the implications of that in production.
 
-#### Experiment 5: Crud
+#### Experiment 5: Leaking database connections
 + Even with only 5 actors in a pool (using SQLite) the actors crash because the database is locked.
++ When using mysql, the async method runs almost 2.5 times quiker (12.5 seconds, vs 30.1 seconds), HOWEVER...
++ It tends to lock the database after the method runs, when running with Rails Console. *What's happening here?*
++ It also periodically crashses during task, as it has issues connecting to the database (waited 5 seconds... blah, blah)
++ With a pool of 3, I still have issues with it crashing, but slightly less often. The Celluloid/Active-Record combination [appears to be leaking db connections](https://groups.google.com/forum/#!topic/celluloid-ruby/n9a1RpRztjY)
+
+ Type | Time | Database lock?
+ --- | --- | ---
+ Async, pool==5, | 11-12 sec | *yes*
+ Sync, pool==5 | 30-31 sec | *yes*
+ Asyncy, pool==3 | 18-19 sec | yes, but less often
+ Sync, pool==3 | 30-31 sec | yes, but less often
 
 ## TODO
 + Try to keep track of state and results
 + Experiment with threadsafe performance
 + Write to an actual database
+
 
 ##THEMES
 + writing multi-threaded code can be tricky regardless of which tool you use
