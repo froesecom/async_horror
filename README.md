@@ -37,6 +37,9 @@ What the experts says:
 + This exception will be raised if you try to implement more `ERROR -- : Actor crashed! ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds`
 + You can change the [default number of connections](https://devcenter.heroku.com/articles/concurrency-and-database-connections), but I'm not sure of the implications of that in production.
 
+#### Experiment 5: Crud
++ Even with only 5 actors in a pool (using SQLite) the actors crash because the database is locked.
+
 ## TODO
 + Try to keep track of state and results
 + Experiment with threadsafe performance
