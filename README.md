@@ -56,6 +56,9 @@ What the experts says:
 + Experiment with threadsafe performance
 + Write to an actual database
 
+#### Experiment 6: Stale connections
++ Apparently Rails 3 would [clear stale connections for you](https://bibwild.wordpress.com/2014/07/17/activerecord-concurrency-in-rails4-avoid-leaked-connections/). In Rails 4, it's much harder to clean up leaked connections.
++ You have to explicitly ensures the connection is returned back to the pool when completed using `ActiveRecord::Base.connection_pool.with_connection`. This is an ActiveRecord thing, not a Celluloid thing. This seems to do the trick.
 
 ##THEMES
 + writing multi-threaded code can be tricky regardless of which tool you use
