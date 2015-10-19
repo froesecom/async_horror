@@ -11,7 +11,7 @@ default: &default
 
 development:
   host: localhost
-  password: fl@mes12
+  password: password_here
   database: async_horror_dev
   username: root
   pool: 5
