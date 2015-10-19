@@ -3,7 +3,7 @@ class DirtBag < ActiveRecord::Base
 
   def self.import_dirtbags_async
     
-    pool = CsvImporter::ImportActor.pool(size: 3)
+    pool = CsvImporter::ImportActor.pool(size: 5)
     SmarterCSV.process("public/all_the_things.csv").map do |row|
       pool.future(:process_row, row)
     end.map(&:value)
@@ -12,7 +12,7 @@ class DirtBag < ActiveRecord::Base
   end
   
   def self.import_dirtbags_insync
-    pool = CsvImporter::ImportActor.pool(size: 3)
+    pool = CsvImporter::ImportActor.pool(size: 5)
     SmarterCSV.process("public/all_the_things.csv") do |row|
       pool.process_row(row)
     end
