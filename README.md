@@ -30,6 +30,7 @@ What the experts say:
 What the experts says:
 
 + [This legend](http://stackoverflow.com/questions/33101565/celluloid-futures-not-faster-than-synchronous-computation/33102081#33102081) answered my StackOverflow question.
++ Had I [read the Celluloid docs](https://github.com/celluloid/celluloid-io) a little closer, I would have come across this: "JRuby or Rubinius are the preferred platforms as they support true thread-level parallelism when executing Ruby code, whereas MRI/YARV is constrained by a global interpreter lock (GIL) and can only execute one thread at a time."
 + Most of what I read (including Celluloid docs), say things like this: "writing multi-threaded code can be tricky regardless of which tool you use, and even if you use Celluloid or ruby-concurrent to give you better higher-level abstractions than working directly with threads, working with multi-threaded concurrency will require becoming familiar with some techniques for such and require some tricky debugging from time to time."
 
 #### Experiment 4: The real world
@@ -68,8 +69,11 @@ obs.successes
 ##Challenges
 - Getting async tasks to report back and keep track of what they did is hard.
 
-##Next Up
+##Concurrency good for
 - Run with JRuby
+- Projects with a lot of IO
+- Different implementations You don't have to choose between threaded and evented IO! Celluloid::IO provides an event-driven IO system for building fast, scalable network applications that integrates directly with the Celluloid actor library, making it easy to combine both threaded and evented concepts. Celluloid::IO is ideal for servers which handle large numbers of mostly-idle connections, such as Websocket servers or chat/messaging systems.
+
 
 ##THEMES
 + writing multi-threaded code can be tricky regardless of which tool you use
