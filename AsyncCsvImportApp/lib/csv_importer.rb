@@ -1,5 +1,6 @@
 module CsvImporter
   require 'celluloid/current'
+
   class ImportActor
     include Celluloid
 

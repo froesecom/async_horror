@@ -57,6 +57,14 @@ What the experts says:
 + You have to explicitly ensures the connection is returned back to the pool when completed using `ActiveRecord::Base.connection_pool.with_connection`. This is an ActiveRecord thing, not a Celluloid thing. This seems to do the trick.
 + * The speed increase you get with this async implementation is really OS/hardware dependant. On my faster, higher powered Mac, the asyncy is only about 20% faster (likely because the I/O compenent is really fast)
 
+#### Experiment 7: Observer
+
+paste observer class into console
+dirt = DirtBag.new
+obs = Observer.new
+dirt.import_dirtbags_async
+obs.successes
+
 
 ## TODO
 + Try to keep track of state and results
