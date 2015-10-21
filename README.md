@@ -65,10 +65,11 @@ obs = Observer.new
 dirt.import_dirtbags_async
 obs.successes
 
+##Challenges
+- Getting async tasks to report back and keep track of what they did is hard.
 
-## TODO
-+ Try to keep track of state and results
-+ Experiment with threadsafe performance
+##Next Up
+- Run with JRuby
 
 ##THEMES
 + writing multi-threaded code can be tricky regardless of which tool you use
