@@ -58,16 +58,17 @@ What the experts says:
 + You have to explicitly ensures the connection is returned back to the pool when completed using `ActiveRecord::Base.connection_pool.with_connection`. This is an ActiveRecord thing, not a Celluloid thing. This seems to do the trick.
 + * The speed increase you get with this async implementation is really OS/hardware dependant. On my faster, higher powered Mac, the asyncy is only about 20% faster (likely because the I/O compenent is really fast)
 
-#### Experiment 7: Observer
+#### Experiment 7: Observers
+- Setting up celluloid notifications to even just do basic incrementing of a variable after success, destroys all benefit I'd previously seen for async.
+- Basically, this implemenation of mutlithreading is no good for a .csv import. Back to the drawing board!
 
-paste observer class into console
-dirt = DirtBag.new
-obs = Observer.new
-dirt.import_dirtbags_async
-obs.successes
+To test it, you'll have to do the following, because I'd basically given up on this experiment by this point:
+- paste observer class into console
+- dirt = DirtBag.new
+- obs = Observer.new
+- dirt.import_dirtbags_async
+- obs.successes
 
-##Challenges
-- Getting async tasks to report back and keep track of what they did is hard.
 
 ##Concurrency good for
 - Run with JRuby
